@@ -10,11 +10,60 @@ using System.Windows.Forms;
 
 namespace digitalClock2
 {
-    public partial class Form1 : Form
+    public partial class clock : Form
     {
-        public Form1()
+        Timer t = new Timer();
+
+        public clock()
         {
             InitializeComponent();
+        }
+
+        private void clock_Load(object sender, EventArgs e)
+        {
+            t.Interval.Equals(1000);
+
+            t.Tick += new EventHandler(this.t_Tick);
+
+            t.Start();
+        }
+
+        private void t_Tick(object sender, EventArgs e)
+        {
+            int hh = DateTime.Now.Hour;
+            int mm = DateTime.Now.Minute;
+            int ss = DateTime.Now.Second;
+
+            string time = " ";
+
+            if (hh < 10)
+            {
+                time += "0" + hh;
+            }
+            else
+            {
+                time += hh;
+            }
+            time += ":";
+            if (mm < 10)
+            {
+                time += "0" + mm;
+            }
+            else
+            {
+                time += mm;
+            }
+            time += ":";
+            if (ss < 10)
+            {
+                time += "0" + ss;
+            }
+            else
+            {
+                time += ss;
+            }
+
+            label1.Text = time;
         }
     }
 }
